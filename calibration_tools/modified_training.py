@@ -1,10 +1,14 @@
 import torch
 import numpy as np
-import torch.nn
+
+import torch.nn as nn
+import torch.nn.functional as F
+
+from sklearn.metrics import log_loss
 
 
 class BaselineTrainable():
-    def __init__(self, net, optimizer, criterion, train_dataset, val_dataset, batch_size,
+    def __init__(self, net, optimizer, criterion, train_dataset, val_dataset, batch_size=128,
                  save_dir="best_checkpoint.pth", num_epoch=10):
         """
         Initialize class
@@ -28,7 +32,8 @@ class BaselineTrainable():
         self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
     def _train_epoch(self):
-        trainloader = torch.utils.data.DataLoader(self.train_dataset, batch_size=self.batch_size, shuffle=True, num_workers=8)
+        trainloader = torch.utils.data.DataLoader(self.train_dataset, batch_size=self.batch_size, shuffle=True,
+                                                  num_workers=8)
         self.net.train()
         train_loss = 0
         for batch_idx, (inputs, labels, _, idx, gt_label) in enumerate(trainloader):
@@ -103,9 +108,6 @@ class FocalLoss(nn.Module):
     def __init__(self, gamma=0, size_average=True):
         super(FocalLoss, self).__init__()
         self.gamma = gamma
-        self.alpha = alpha
-        if isinstance(alpha,(float,int)): self.alpha = torch.Tensor([alpha,1-alpha])
-        if isinstance(alpha,list): self.alpha = torch.Tensor(alpha)
         self.size_average = size_average
 
     def forward(self, input, target):

@@ -27,6 +27,44 @@ def softmax(x):
     return e_x / e_x.sum(axis=1, keepdims=1)
 
 
+def mse_t(t, *args):
+    ## find optimal temperature with MSE loss function
+    logit, label = args
+    logit = logit/t
+    n = np.sum(np.exp(logit),1)
+    p = np.exp(logit)/n[:,None]
+    mse = np.mean((p-label)**2)
+    return mse
+
+
+def ll_t(t, *args):
+    ## find optimal temperature with Cross-Entropy loss function
+    logit, label = args
+    logit = logit/t
+    n = np.sum(np.exp(logit),1)
+    p = np.clip(np.exp(logit)/n[:,None],1e-20,1-1e-20)
+    N = p.shape[0]
+    ce = -np.sum(label*np.log(p))/N
+    return ce
+
+
+def mse_w(w, *args):
+    ## find optimal weight coefficients with MSE loss function
+    p0, p1, p2, label = args
+    p = w[0]*p0+w[1]*p1+w[2]*p2
+    p = p/np.sum(p,1)[:,None]
+    mse = np.mean((p-label)**2)
+    return mse
+
+
+def ll_w(w, *args):
+    ## find optimal weight coefficients with Cros-Entropy loss function
+    p0, p1, p2, label = args
+    p = (w[0]*p0+w[1]*p1+w[2]*p2)
+    N = p.shape[0]
+    ce = -np.sum(label*np.log(p))/N
+    return ce
+
 def plot_reliability_curve(y, output_prob, ece, mce, ax=None, n_bins=15):
     idx_sorted = np.argsort(output_prob[:, 1])
     sorted_prob = output_prob[idx_sorted, 1]
