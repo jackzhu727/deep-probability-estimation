@@ -1,5 +1,5 @@
 # UTKFace 
-Large Scale Face Dataset for robability estimation
+Large Scale Face Dataset for probability estimation
 
 ## Introduction
 To benchmark the performance of neural networks on the task of probability estimation, we build a synthetic dataset based on [UTKFace](https://susanqq.github.io/UTKFace/). The UTKFace dataset consists of over 20,000 face images with annotations of age. We use the age of the $i$th person $z_i$ to assign them a risk of contracting a disease $p_i= \psi(z_i)$ for a fixed function $\psi: \mathbb{N} \rightarrow [0,1]$. Then we simulate whether the person actually contracts the illness by assigning it a label $y_i=1$ with probability $p_i$, and $y_i=0$ otherwise. The probability-estimation task is to estimate the ground-truth probability $p_i$ from the face image $x_i$, which requires learning to discriminate age and map it to the corresponding risk.
