@@ -44,13 +44,14 @@ We propose Calibrated Probability Estimation (CaPE), a novel technique which mod
 
 
 ## Results
-- **Synthetic dataset - Face-Based Risk Prediction**
+### Synthetic dataset - Face-Based Risk Prediction
   <p align="center">
   <img src="https://user-images.githubusercontent.com/32464452/144645100-8beb337d-3457-46c5-acd7-b8f88b849b1c.png" alt>
   <em> <br /> Our proposed approach outperforms existing approaches for different simulated scenarios.</em>
 </p>
 
-- **Real-world datasets**
+### Real-world datasets
+
 **Survival of Cancer Patients**: Based on the Hematoxylin and Eosin slides of non-small cell lung cancers from The Cancer Genome Atlas Program (TCGA), we estimate the the 5-year survival probability of cancer patients. 
 
 **Weather Forecasting**: We use the German Weather service dataset, which contains quality-controlled rainfall-depth composites from 17 operational Doppler radars. We use 30 minutes of precipitation data to predict if the mean precipitation over the area covered will increase or decrease one hour after the most recent measurement. Three precipitation maps from the past 30 minutes serve as an input.
