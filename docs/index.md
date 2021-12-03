@@ -33,13 +33,13 @@ Our proposed apporach achieves two objectives:
 - Avoids overfitting of the model.
 <p align="center">
   <img src="https://user-images.githubusercontent.com/32464452/144643659-6537f6eb-ee52-46f5-ba0e-86e42dd90208.png" alt>
-  <em> Comparison between the learning curves of cross-entropy (CE) minimization and the proposed calibrated probability estimation (CaPE), smoothed with a 5-epoch moving average. After an early-learning stage where both training and validation losses decrease, CE minimization overfits (first and second graph), with disastrous consequences in terms of probability estimation (third and fourth graph). In contrast, CaPE prevents overfitting, continuing to improve the model while maintaining calibration. </em>
+  <em> <br /> Comparison between the learning curves of cross-entropy (CE) minimization and the proposed calibrated probability estimation (CaPE), smoothed with a 5-epoch moving average. After an early-learning stage where both training and validation losses decrease, CE minimization overfits (first and second graph), with disastrous consequences in terms of probability estimation (third and fourth graph). In contrast, CaPE prevents overfitting, continuing to improve the model while maintaining calibration. </em>
 </p>
 
 - Improves calibration and discrimination performance of the model.
 <p align="center">
   <img src="https://user-images.githubusercontent.com/32464452/144642950-e477d168-793a-4d9e-818a-5e4c65b637c6.png" alt>
-  <em> When trained on infinite data (i.e. resampling outcome labels at each epoch according to ground-truth probabilities), models minimizing cross-entropy are well calibrated (first column). The top row shows results for the synthetic Discrete scenario (top). The bottom row shows results for the Linear scenario (dashed line indicates perfect calibration). However, when trained on fixed observed outcomes, the model eventually overfits and the probabilities collapse to either 0 or 1 (second column). This is mitigated via early stopping (i.e. selecting the model based on validation cross-entropy loss), which yields relatively good calibration (third column). The proposed Calibration Probability Estimation (CaPE) method exploits this to further improve the model discrimination while ensuring that the output remains well calibrated.</em>
+  <em> <br /> When trained on infinite data (i.e. resampling outcome labels at each epoch according to ground-truth probabilities), models minimizing cross-entropy are well calibrated (first column). The top row shows results for the synthetic Discrete scenario (top). The bottom row shows results for the Linear scenario (dashed line indicates perfect calibration). However, when trained on fixed observed outcomes, the model eventually overfits and the probabilities collapse to either 0 or 1 (second column). This is mitigated via early stopping (i.e. selecting the model based on validation cross-entropy loss), which yields relatively good calibration (third column). The proposed Calibration Probability Estimation (CaPE) method exploits this to further improve the model discrimination while ensuring that the output remains well calibrated.</em>
 </p>
 
 
@@ -47,7 +47,7 @@ Our proposed apporach achieves two objectives:
 - **Synthetic dataset - Face-Based Risk Prediction**
   <p align="center">
   <img src="https://user-images.githubusercontent.com/32464452/144645100-8beb337d-3457-46c5-acd7-b8f88b849b1c.png" alt>
-  <em> Our proposed approach outperforms existing approaches for different simulated scenarios.</em>
+  <em> <br /> Our proposed approach outperforms existing approaches for different simulated scenarios.</em>
 </p>
 
 - **Real-world datasets**
@@ -60,12 +60,12 @@ Our proposed apporach achieves two objectives:
 On all three real-world datasets, CaPE outperforms the existing calibration approaches (when compared on the Brier score which was found to capture the probability esitmation performace)
 <p align="center">
   <img src="https://user-images.githubusercontent.com/32464452/144646458-3b68b90d-0cca-46b7-89ab-ba5dfea4584c.png" alt>
-  <em> Our proposed approach outperforms existing approaches for different simulated scenarios.</em>
+  <em> <br /> Our proposed approach outperforms existing approaches for different simulated scenarios.</em>
 </p>
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/32464452/144646569-53fb0e4b-9a14-45e2-a6f7-d6a203dcd89a.png" alt>
-  <em> Reliability diagrams for real-world data. Reliability diagrams computed on test data for cross-entropy minimization with early stopping, the proposed method (CaPE) and the best baseline for each dataset. Among all the methods, CaPE produces better calibrated outputs.</em>
+  <em> <br /> Reliability diagrams for real-world data. Reliability diagrams computed on test data for cross-entropy minimization with early stopping, the proposed method (CaPE) and the best baseline for each dataset. Among all the methods, CaPE produces better calibrated outputs.</em>
 </p>
 
 
