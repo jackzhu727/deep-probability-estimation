@@ -29,7 +29,7 @@ We propose Calibrated Probability Estimation (CaPE), a novel technique which mod
   <img src="https://user-images.githubusercontent.com/32464452/144643132-a2557b03-43b2-48ad-949c-b42c2d5a0417.png" />
 </p>
 
-Our proposed apporach achieves two objectives:
+### Our proposed apporach achieves two objectives:
 - Avoids overfitting of the model.
 <p align="center">
   <img src="https://user-images.githubusercontent.com/32464452/144643659-6537f6eb-ee52-46f5-ba0e-86e42dd90208.png" alt>
