@@ -18,14 +18,29 @@ Probability estimation shares similar target labels and network outputs with bin
  For synthetic datasets, we have access to the ground truth probability labels and can use them to evaluate performance. A reasonable metric is the mean squared error ( <img src="https://latex.codecogs.com/gif.latex?\text{MSE}_p" /> ) between the estimated probability and the ground truth probability.
 - **Metrics when ground truth probabilities are not available**
   This is usually the case for most of the real-world datasets. There are several calibration metrics like ECE, MCE, KS-error or classification metrics like Brier score and AUC can be used to evaluate the performance of the model. But, from several metrics, which metric captures the true probability estimation performance? 
+
 To answer this question, we use synthetic data to compare different metrics to the __gold-standard__  <img src="https://latex.codecogs.com/gif.latex?\text{MSE}_p" /> that uses ground-truth probabilities. Brier score is found to be highly correlated with <img src="https://latex.codecogs.com/gif.latex?\text{MSE}_p" />, in contrast to the classification metric AUC and the calibration metrics ECE, MCE and KS-Error.
 <p align="center">
   <img src="https://user-images.githubusercontent.com/32464452/144640753-700c8858-09f1-4503-971f-aa73b0918c14.png" />
 </p>
 
 ## Proposed Method: Calibrated Probability Estimation (CAPE)
+We propose Calibrated Probability Estimation (CaPE), a novel technique which modifies the training process so that output probabilities are consistent with empirical probabilities computed from the data. CaPE outperforms existing approaches on most metrics on  synthetic and real-world data. The pseudo-code for our proposed approach can be seen below:
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/32464452/144508026-c03afa71-b454-484d-bddd-7f990372858e.png" />
+  <img src="https://user-images.githubusercontent.com/32464452/144643132-a2557b03-43b2-48ad-949c-b42c2d5a0417.png" />
+</p>
+
+Our proposed apporach achieves two objectives:
+- Avoids overfitting of the model.
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/32464452/144643659-6537f6eb-ee52-46f5-ba0e-86e42dd90208.png" />
+  <em> Comparison between the learning curves of cross-entropy (CE) minimization and the proposed calibrated probability estimation (CaPE), smoothed with a 5-epoch moving average. After an \emph{early-learning} stage where both training and validation losses decrease, CE minimization overfits (first and second graph), with disastrous consequences in terms of probability estimation (third and fourth graph). In contrast, CaPE prevents overfitting, continuing to improve the model while maintaining calibration. </em>
+</p>
+
+- Improves calibration and discrimination performance of the model.
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/32464452/144642950-e477d168-793a-4d9e-818a-5e4c65b637c6.png" />
+  
 </p>
 
 
