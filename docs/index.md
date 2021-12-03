@@ -52,13 +52,14 @@ We propose Calibrated Probability Estimation (CaPE), a novel technique which mod
 
 ### Real-world datasets
 
-**Survival of Cancer Patients**: Based on the Hematoxylin and Eosin slides of non-small cell lung cancers from The Cancer Genome Atlas Program (TCGA), we estimate the the 5-year survival probability of cancer patients. 
+- **Survival of Cancer Patients**: Based on the Hematoxylin and Eosin slides of non-small cell lung cancers from The Cancer Genome Atlas Program (TCGA), we estimate the the 5-year survival probability of cancer patients. 
 
-**Weather Forecasting**: We use the German Weather service dataset, which contains quality-controlled rainfall-depth composites from 17 operational Doppler radars. We use 30 minutes of precipitation data to predict if the mean precipitation over the area covered will increase or decrease one hour after the most recent measurement. Three precipitation maps from the past 30 minutes serve as an input.
+- **Weather Forecasting**: We use the German Weather service dataset, which contains quality-controlled rainfall-depth composites from 17 operational Doppler radars. We use 30 minutes of precipitation data to predict if the mean precipitation over the area covered will increase or decrease one hour after the most recent measurement. Three precipitation maps from the past 30 minutes serve as an input.
 
-**Collision Prediction**: We use 0.3 seconds of real dashcam videos from __YouTubeCrash__ dataset as input, and predict the probability of a collision in the next 2 seconds.
+- **Collision Prediction**: We use 0.3 seconds of real dashcam videos from __YouTubeCrash__ dataset as input, and predict the probability of a collision in the next 2 seconds.
 
-On all three real-world datasets, CaPE outperforms the existing calibration approaches (when compared on the Brier score which was found to capture the probability esitmation performace)
+On all the three real-world datasets, CaPE outperforms the existing calibration approaches (when compared on the Brier score which was found to capture the probability esitmation performace in the absence of the ground truth probabilities)
+
 <p align="center">
   <img src="https://user-images.githubusercontent.com/32464452/144646458-3b68b90d-0cca-46b7-89ab-ba5dfea4584c.png" alt>
   <em> <br /> Our proposed approach outperforms existing approaches for different simulated scenarios.</em>
