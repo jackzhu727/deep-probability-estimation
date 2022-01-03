@@ -26,7 +26,7 @@ class FaceDataset(torch.utils.data.Dataset):
         elif self.prob_type == 'sig':
             self.prob_sim_func = lambda x: 1.0 - expit((x - 0.29) * 25)
         elif self.prob_type == 'scaled':
-            self.prob_sim_func = lambda x: np.sqrt(x) / 2.0
+            self.prob_sim_func = lambda x: x / 2.5
         elif self.prob_type == 'mid':
             self.prob_sim_func = lambda x: x / 3.0 + 0.35
         elif self.prob_type == 'step':
