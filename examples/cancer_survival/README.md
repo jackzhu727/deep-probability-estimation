@@ -7,7 +7,7 @@ the stage and level of differentiation of cancer. Hematoxylin and Eosin (H&E)-st
 the most common type of histopathology data used for clinical decision making. Treatments assigned to patients after diagnosis are not personalized and their
 impact on cancer trajectory is complex, so the survival status of a patient is not deterministic. In
 this work, we use the H&E slides of non-small cell lung cancers from The Cancer Genome Atlas
-Program (TCGA) to estimate the the 5-year survival probability of cancer patients. 
+Program ([TCGA](portal.gdc.cancer.gov)) to estimate the the 5-year survival probability of cancer patients. 
 
 The dataset has 1512 whole slide images
 from 1009 patients, and 352 of them died in 5-years. We split the samples by patients and source
@@ -19,7 +19,7 @@ trained with the binary label of survival in 5 years.
 
 ## Datasets
 
-Download the extracted embeddings [here]()
+Download the extracted embeddings [here](https://drive.google.com/drive/folders/1d2mnR7esOvCUTSDgwCmihLiFpSAwlnM3?usp=sharing)
 
 ## Dataloader
 If you are using PyTorch, we provide the dataloader [here](https://github.com/jackzhu727/deep-probability-estimation/blob/main/datasets/cancer_survival.py).
