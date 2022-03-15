@@ -4,7 +4,7 @@ This website contains results, code and pre-trained models from [Deep Probabilit
 
 ## What is probability estimation and why is it important?
 Reliable probability estimation is of crucial importance in many real-world applications where there is inherent uncertainty, such as weather forecasting, medical prognosis, or collision avoidance in autonomous vehicles. 
-<img align="left" width="100" height="100" src="https://user-images.githubusercontent.com/32464452/158394782-b9b7c4e4-544d-4fd0-82d9-9699e265b098.png">
+<img align="left" width="512" height="512" src="https://user-images.githubusercontent.com/32464452/158394782-b9b7c4e4-544d-4fd0-82d9-9699e265b098.png">
 
 Probability-estimation models are trained on observed outcomes ( <img src="https://latex.codecogs.com/gif.latex?y_i" /> ) (e.g. whether it has rained or not, or whether a patient has died or not), because the ground-truth probabilities ( <img src="https://latex.codecogs.com/gif.latex?p_i" /> ) of the events of interest are typically unknown. The problem is therefore analogous to binary classification, with the important difference that the objective is to estimate probabilities ( <img src="https://latex.codecogs.com/gif.latex?\hat{p}" /> ) rather than predicting the specific outcome.
 
