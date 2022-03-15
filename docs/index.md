@@ -15,19 +15,6 @@ Probability-estimation models are trained on observed outcomes (<img src="https:
   <em> <br />The probability-estimation problem. In probability estimation, we assume that each observed outcome <img src="https://latex.codecogs.com/gif.latex?y_i" /> (e.g. death or survival in cancer patients) in the training set is randomly generated from a latent unobserved probability <img src="https://latex.codecogs.com/gif.latex?p_i" /> associated to the corresponding data <img src="https://latex.codecogs.com/gif.latex?x_i" /> (e.g. histopathology images).Training (left): Only <img src="https://latex.codecogs.com/gif.latex?x_i" /> and <img src="https://latex.codecogs.com/gif.latex?y_i" /> can be used for training, because <img src="https://latex.codecogs.com/gif.latex?p_i" /> is not observed. Inference (right): Given new data <img src="https://latex.codecogs.com/gif.latex?x" />, the trained network <img src="https://latex.codecogs.com/gif.latex?f" /> produces a probability estimate <img src="https://latex.codecogs.com/gif.latex?\hat{p}" /> in [0,1].</em>
 </p>
 
-## Evaluation metrics 
-Probability estimation shares similar target labels and network outputs with binary classification. However, classification accuracy is __not__ an appropriate metric for evaluating probability-estimation models due to the inherent uncertainty of the outcomes. 
-
-- **Metrics when ground truth probabilities are available**
- For synthetic datasets, we have access to the ground truth probability labels and can use them to evaluate performance. A reasonable metric is the mean squared error (<img src="https://latex.codecogs.com/gif.latex?\text{MSE}_p" />) between the estimated probability and the ground truth probability.
-- **Metrics when ground truth probabilities are not available**
-  This is usually the case for most real-world datasets. There are several calibration metrics like ECE, MCE, KS-error, or classification metrics like Brier score and AUC that can be used to evaluate the performance of the model. But, from several metrics, which metric captures the true probability estimation performance? 
-
-To answer this question, we use synthetic data to compare different metrics to the __gold-standard__  <img src="https://latex.codecogs.com/gif.latex?\text{MSE}_p" /> that uses ground-truth probabilities. Brier score is found to be highly correlated with <img src="https://latex.codecogs.com/gif.latex?\text{MSE}_p" />, in contrast to the classification metric AUC and the calibration metrics ECE, MCE and KS-Error.
-<p align="left">
-  <img src="https://user-images.githubusercontent.com/32464452/144640753-700c8858-09f1-4503-971f-aa73b0918c14.png" />
-</p>
-
 ## Proposed Method: Calibrated Probability Estimation (CAPE)
 We propose Calibrated Probability Estimation (CaPE), a novel technique that modifies the training process so that output probabilities are consistent with empirical probabilities computed from the data. CaPE outperforms existing approaches on most metrics on synthetic and real-world data. The pseudo-code for our proposed approach can be seen below:
 <p align="left">
@@ -49,8 +36,7 @@ We propose Calibrated Probability Estimation (CaPE), a novel technique that modi
 </p>
 
 
-## Results
-### Synthetic dataset - Face-Based Risk Prediction
+## Synthetic dataset - Face-Based Risk Prediction
 To benchmark probability-estimation methods, we build a synthetic dataset based on UTKFace (Zhang et al., 2017b), containing face images and associated ages. We use the age of the person to assign them a probability of contracting a disease. Then we simulate whether the person actually contracts the illness or not with the assigned probability.
 <p align="left">
   <img src="https://user-images.githubusercontent.com/32464452/158399694-386ff3ec-6464-4e0f-952f-21c954a953a9.PNG" alt>
@@ -63,6 +49,20 @@ The probability-estimation task is to estimate the assigned probability from the
   <em> <br /> Our proposed approach outperforms existing approaches for different simulated scenarios.</em>
 </p>
 
+## Evaluation metrics 
+Probability estimation shares similar target labels and network outputs with binary classification. However, classification accuracy is __not__ an appropriate metric for evaluating probability-estimation models due to the inherent uncertainty of the outcomes. 
+
+- **Metrics when ground truth probabilities are available**
+ For synthetic datasets, we have access to the ground truth probability labels and can use them to evaluate performance. A reasonable metric is the mean squared error (<img src="https://latex.codecogs.com/gif.latex?\text{MSE}_p" />) between the estimated probability and the ground truth probability.
+- **Metrics when ground truth probabilities are not available**
+  This is usually the case for most real-world datasets. There are several calibration metrics like ECE, MCE, KS-error, or classification metrics like Brier score and AUC that can be used to evaluate the performance of the model. But, from several metrics, which metric captures the true probability estimation performance? 
+
+To answer this question, we use the synthetic dataset to compare different metrics to the __gold-standard__  <img src="https://latex.codecogs.com/gif.latex?\text{MSE}_p" /> that uses ground-truth probabilities. Brier score is found to be highly correlated with <img src="https://latex.codecogs.com/gif.latex?\text{MSE}_p" />, in contrast to the classification metric AUC and the calibration metrics ECE, MCE and KS-Error.
+<p align="left">
+  <img src="https://user-images.githubusercontent.com/32464452/144640753-700c8858-09f1-4503-971f-aa73b0918c14.png" />
+</p>
+
+## Results
 ### Real-world datasets
 
 - **Survival of Cancer Patients**: Based on the Hematoxylin and Eosin slides of non-small cell lung cancers from The Cancer Genome Atlas Program (TCGA), we estimate the 5-year survival probability of cancer patients. 
