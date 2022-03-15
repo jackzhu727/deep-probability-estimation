@@ -3,10 +3,11 @@
 This website contains results, code, and pre-trained models from [Deep Probability Estimation](https://arxiv.org/abs/2111.10734) by Sheng Liu\*, Aakash Kaku\*, Weicheng Zhu\*, Matan Leibovich\*,  Sreyas Mohan\*, Boyang Yu, Laure Zanna, Narges Razavian, Carlos Fernandez-Granda [\* - Equal Contribution].
 
 ## Video presentation
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/cM7I357nrpA/3701.jpg)](https://www.youtube.com/watch?v=cM7I357nrpA?t=3701)
+[![IMAGE ALT TEXT HERE](https://user-images.githubusercontent.com/32464452/158452355-da5d88bb-8f79-4665-a84a-0639d0199454.PNG)](https://www.youtube.com/watch?v=cM7I357nrpA?t=3701)
 
 ## What is probability estimation and why is it important?
-Reliable probability estimation is of crucial importance in many real-world applications where there is inherent uncertainty, such as weather forecasting, medical prognosis, or collision avoidance in autonomous vehicles. 
+Reliable probability estimation is of crucial importance in many real-world applications where there is inherent uncertainty, such as weather forecasting, medical prognosis, or collision avoidance in autonomous vehicles.
+
 
 ![website_image_2](https://user-images.githubusercontent.com/32464452/158398042-b6d0d993-3ea7-4a24-859f-bb45a00dec52.png)
 
