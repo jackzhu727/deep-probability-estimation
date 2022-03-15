@@ -1,5 +1,5 @@
 # TCGA-LUSC and TCGA-LUAD 
-Probability estimation on 5-year survival of non-small cell lung lung cancer patients
+Probability estimation on 5-year survival of non-small cell lung cancer patients
 
 ## Introduction
 Histopathology aims to identify tumor cells, cancer subtypes, and
