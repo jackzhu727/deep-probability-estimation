@@ -2,7 +2,7 @@ import pickle
 from torch.utils.data import Dataset
 
 
-class SurvivalDataset(Dataset):
+class CancerDataset(Dataset):
     def __init__(self, data_path):
         self.embedding_path = "{}_embeddings.pkl".format(data_path)
         self.outcome_path = "{}_outcomes.pkl".format(data_path)
