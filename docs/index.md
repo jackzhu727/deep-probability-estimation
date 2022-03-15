@@ -62,8 +62,7 @@ To answer this question, we use the synthetic dataset to compare different metri
   <img src="https://user-images.githubusercontent.com/32464452/144640753-700c8858-09f1-4503-971f-aa73b0918c14.png" />
 </p>
 
-## Results
-### Real-world datasets
+## Real-world datasets
 
 - **Survival of Cancer Patients**: Based on the Hematoxylin and Eosin slides of non-small cell lung cancers from The Cancer Genome Atlas Program (TCGA), we estimate the 5-year survival probability of cancer patients. 
 
