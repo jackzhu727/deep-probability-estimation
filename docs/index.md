@@ -8,7 +8,7 @@ Reliable probability estimation is of crucial importance in many real-world appl
 ![website_image_2](https://user-images.githubusercontent.com/32464452/158398042-b6d0d993-3ea7-4a24-859f-bb45a00dec52.png)
 
 <!-- <img align="center" width="720" src="https://user-images.githubusercontent.com/32464452/158396497-98d4ac2a-8668-4700-8ff3-e3ec6611e892.png"> -->
-Probability-estimation models are trained on observed outcomes ( <img src="https://latex.codecogs.com/gif.latex?y_i" /> ) (e.g. whether it has rained or not, or whether a patient has died or not), because the ground-truth probabilities ( <img src="https://latex.codecogs.com/gif.latex?p_i" /> ) of the events of interest are typically unknown. The problem is therefore analogous to binary classification, with the important difference that the objective is to estimate probabilities ( <img src="https://latex.codecogs.com/gif.latex?\hat{p}" /> ) rather than predicting the specific outcome.
+Probability-estimation models are trained on observed outcomes (<img src="https://latex.codecogs.com/gif.latex?y_i" />) (e.g. whether it has rained or not, or whether a patient has died or not), because the ground-truth probabilities (<img src="https://latex.codecogs.com/gif.latex?p_i" />) of the events of interest are typically unknown. The problem is therefore analogous to binary classification, with the important difference that the objective is to estimate probabilities (<img src="https://latex.codecogs.com/gif.latex?\hat{p}" />) rather than predicting the specific outcome.
 
 <p align="left">
   <img src="https://user-images.githubusercontent.com/32464452/144637201-b9aed32f-f5e7-46f0-a4ef-0a9f2baa7a78.png" alt>
@@ -19,7 +19,7 @@ Probability-estimation models are trained on observed outcomes ( <img src="https
 Probability estimation shares similar target labels and network outputs with binary classification. However, classification accuracy is __not__ an appropriate metric for evaluating probability-estimation models due to the inherent uncertainty of the outcomes. 
 
 - **Metrics when ground truth probabilities are available**
- For synthetic datasets, we have access to the ground truth probability labels and can use them to evaluate performance. A reasonable metric is the mean squared error ( <img src="https://latex.codecogs.com/gif.latex?\text{MSE}_p" /> ) between the estimated probability and the ground truth probability.
+ For synthetic datasets, we have access to the ground truth probability labels and can use them to evaluate performance. A reasonable metric is the mean squared error (<img src="https://latex.codecogs.com/gif.latex?\text{MSE}_p" />) between the estimated probability and the ground truth probability.
 - **Metrics when ground truth probabilities are not available**
   This is usually the case for most real-world datasets. There are several calibration metrics like ECE, MCE, KS-error, or classification metrics like Brier score and AUC that can be used to evaluate the performance of the model. But, from several metrics, which metric captures the true probability estimation performance? 
 
