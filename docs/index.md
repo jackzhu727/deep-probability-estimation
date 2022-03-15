@@ -51,9 +51,10 @@ We propose Calibrated Probability Estimation (CaPE), a novel technique that modi
 
 ## Results
 ### Synthetic dataset - Face-Based Risk Prediction
-To benchmark probability-estimation methods, we build a synthetic dataset based on UTKFace (Zhang et al., 2017b), containing face images and associated ages. We use the age of the person to assign them a probability of contracting a disease. Then we simulate whether the person actually contracts the illness or not with the assigned probability. The probability-estimation task is to estimate the assigned probability from the face image using a model that only has access to the images and the binary outcomes during training.
+To benchmark probability-estimation methods, we build a synthetic dataset based on UTKFace (Zhang et al., 2017b), containing face images and associated ages. We use the age of the person to assign them a probability of contracting a disease. Then we simulate whether the person actually contracts the illness or not with the assigned probability.
 ![face_dataset](https://user-images.githubusercontent.com/32464452/158399694-386ff3ec-6464-4e0f-952f-21c954a953a9.PNG)
-
+ 
+The probability-estimation task is to estimate the assigned probability from the face image using a model that only has access to the images and the binary outcomes during training.
   <p align="left">
   <img src="https://user-images.githubusercontent.com/32464452/144645100-8beb337d-3457-46c5-acd7-b8f88b849b1c.png" alt>
   <em> <br /> Our proposed approach outperforms existing approaches for different simulated scenarios.</em>
