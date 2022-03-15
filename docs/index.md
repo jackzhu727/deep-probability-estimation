@@ -86,7 +86,7 @@ On all the three real-world datasets, CaPE outperforms the existing calibration 
 ## Video presentation
 [![video_presentation](https://user-images.githubusercontent.com/32464452/158455015-1af15b7e-136c-4ce5-96b7-2ad92c986b3f.PNG)](https://youtu.be/cM7I357nrpA?t=3701)
 
-[Slides](https://github.com/jackzhu727/deep-probability-estimation/docs/deep_probability_estimation.pdf)
+[Slides](https://github.com/jackzhu727/deep-probability-estimation/blob/main/docs/deep_probability_estimation.pdf)
 
 ## Pre-Trained Models and Code
 Please visit [our GitHub page](https://github.com/jackzhu727/deep-probability-estimation/) for data, pre-trained models, code, and instructions on how to use the code. 
