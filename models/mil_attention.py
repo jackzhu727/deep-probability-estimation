@@ -4,7 +4,7 @@ import torch.nn.functional as F
 
 
 class MILAttention(nn.Module):
-    def __init__(self, feature=False, batch=True, in_size=1536, hidden_size=512):
+    def __init__(self,  in_size=1536, hidden_size=512, batch=True):
         super(GatedAttention, self).__init__()
         self.L = in_size
         self.D = hidden_size

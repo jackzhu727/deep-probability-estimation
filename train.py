@@ -1,4 +1,4 @@
-'''Train CIFAR10 with PyTorch.'''
+'''Train CaPE with PyTorch.'''
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -22,10 +22,9 @@ from calibration_tools.ensemble import BaselineEnsemble
 from calibration_tools.calibrate import calibrate_model, inference
 from calibration_tools.cape import CaPE
 from datasets import FaceDataset, CancerDataset
-import h5py
 from tqdm import tqdm
 
-parser = argparse.ArgumentParser(description='PyTorch CIFAR10 Training')
+parser = argparse.ArgumentParser(description='PyTorch CaPE Training')
 parser.add_argument('--lr', default=0.1, type=float, help='learning rate')
 parser.add_argument('--resume', '-r', action='store_true',
                     help='resume from checkpoint')
@@ -33,7 +32,8 @@ parser.add_argument('--model-name', default='ckpt.pth', type=str)
 parser.add_argument('--model-dir', default='crossentropy', type=str, required=True)
 parser.add_argument('--label_type', default='equal', type=str)
 parser.add_argument('--methods', default='ce', type=str)
-parser.add_argument('--dataset', default='cifar10', type=str)
+parser.add_argument('--dataset', default='face', type=str)
+parser.add_argument('--early_stopping_ckpt', default='.', type=str)
 args = parser.parse_args()
 
 device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
@@ -42,56 +42,10 @@ start_epoch = 0  # start from epoch 0 or last checkpoint epoch
 
 # Data
 print('==> Preparing data..')
-transform_train = transforms.Compose([
-    transforms.RandomCrop(32, padding=4),
-    transforms.RandomHorizontalFlip(),
-    transforms.ToTensor(),
-    transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
-])
-
-transform_test = transforms.Compose([
-    transforms.ToTensor(),
-    transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
-])
 
 
 def unpickling(file):
     return pickle.load(open(file, 'rb'))
-
-
-class CIFAR10withidx(torch.utils.data.Dataset):
-    def __init__(self, root, targets10_path, download=True, mode='train', train=True, transform=None,
-                 target_transform=None):
-        self.cifar10 = torchvision.datasets.CIFAR10(root=root,
-                                                    download=download,
-                                                    train=train,
-                                                    transform=transform,
-                                                    target_transform=target_transform)
-        # print(self.cifar10.targets)
-        if mode == 'train':
-            self.cifar10.data = self.cifar10.data[0:45000]
-        elif mode == 'val':
-            self.cifar10.data = self.cifar10.data[45000:]
-        self.cifar10.targets = unpickling(targets10_path)[mode + '_targets']
-        self.cifar10.targets_10 = unpickling(targets10_path)[mode + '_10']
-        self.proposed_probs = None
-
-    def __getitem__(self, index):
-        data, target = self.cifar10[index]
-        target_10 = self.cifar10.targets_10[index]
-        if self.proposed_probs is not None:
-            probs = self.proposed_probs[index]
-        else:
-            probs = 0
-        return data, target_10, probs, index, target
-
-    def __len__(self):
-        return len(self.cifar10)
-
-
-def unpickling(file):
-    return pickle.load(open(file, 'rb'))
-
 
 if args.dataset == 'face':
     assert args.label_type in {'linear', 'sig', 'skewed', 'centered', 'discrete'}
@@ -150,8 +104,7 @@ print('==> Building model..')
 if args.dataset == 'face':
     net = torchvision.models.resnet18(num_classes=2)
 elif args.dataset == 'cancer':
-    # net = GatedAttention(batch=True)
-    raise NotImplementedError
+    net = MILAttention(batch=True)
 else:
     net = ResNet(BasicBlock, [2, 2, 2, 2], num_classes=2)
 net = net.to(device)
@@ -168,18 +121,8 @@ if args.resume:
     best_acc = checkpoint['acc']
     start_epoch = checkpoint['epoch']
 
-# weights = [1/0.9,10]
-# class_weights = torch.FloatTensor(weights).to(device)
-# criterion = nn.CrossEntropyLoss(weight=class_weights)
 criterion = nn.CrossEntropyLoss()
-
-optimizer = optim.SGD(net.parameters(), lr=args.lr,
-                      momentum=0.9, weight_decay=5e-4)
-# optimizer = optim.SGD(net.parameters(), lr=args.lr,
-#                       momentum=0.9)
-# optimizer = optim.Adam(net.parameters(), lr=args.lr,
-#                        weight_decay=5e-4)
-# scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=200)
+optimizer = optim.SGD(net.parameters(), lr=args.lr, momentum=0.9, weight_decay=5e-4)
 scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'min', patience=5, factor=0.5, \
                                                        min_lr=1e-6, verbose=True)
 
@@ -284,7 +227,7 @@ elif args.methods == 'ours_bin':
     if not os.path.isdir(args.model_dir):
         os.mkdir(args.model_dir)
     # lr = 1e-3
-    model_path = "./checkpoints/survival_bag/ce/ckpt.pth"
+    model_path = args.early_stopping_ckpt
     checkpoint = torch.load(model_path)['net']
     net.load_state_dict(checkpoint)
     optimizer = torch.optim.SGD(net.parameters(), lr=args.lr, momentum=0.9, weight_decay=5e-4)
@@ -305,7 +248,7 @@ elif args.methods == 'ours_bin':
 elif args.methods == 'ours_kd':
     if not os.path.isdir(args.model_dir):
         os.mkdir(args.model_dir)
-    model_path = "./checkpoints/survival_bag/ce/ckpt.pth"
+    model_path = args.early_stopping_ckpt
     checkpoint = torch.load(model_path)['net']
     net.load_state_dict(checkpoint)
     optimizer = torch.optim.SGD(net.parameters(), lr=args.lr, momentum=0.9, weight_decay=5e-4)
