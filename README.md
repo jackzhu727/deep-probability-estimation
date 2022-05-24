@@ -33,12 +33,13 @@ we name Calibrated Probability Estimation (CaPE). CaPE outperforms existing appr
 
 ### Our proposed approach achieves two objectives:
 - Avoids overfitting of the model.
+- Improves calibration and discrimination performance of the model by exploiting early learning (Figure 2 last column).
+
 <p align="left">
   <img src="https://user-images.githubusercontent.com/32464452/144643659-6537f6eb-ee52-46f5-ba0e-86e42dd90208.png" alt>
   <em> <br /> Figure 3: Comparison between the learning curves of cross-entropy (CE) minimization and the proposed calibrated probability estimation (CaPE), smoothed with a 5-epoch moving average. After an early-learning stage where both training and validation losses decrease, CE minimization overfits (first and the second graph), with disastrous consequences in terms of probability estimation (third and fourth graph). In contrast, CaPE prevents overfitting, continuing to improve the model while maintaining calibration. </em>
 </p>
 
-- Improves calibration and discrimination performance of the model by exploiting early learning (Figure 2 last column).
 
 
 ## Synthetic dataset - Face-Based Risk Prediction
