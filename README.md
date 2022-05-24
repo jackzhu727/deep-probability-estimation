@@ -12,7 +12,16 @@ Probability-estimation models are trained on observed outcomes (<img src="https:
 
 <p align="left">
   <img src="https://user-images.githubusercontent.com/32464452/144637201-b9aed32f-f5e7-46f0-a4ef-0a9f2baa7a78.png" alt>
-  <em> <br />The probability-estimation problem. In probability estimation, we assume that each observed outcome <img src="https://latex.codecogs.com/gif.latex?y_i" /> (e.g. death or survival in cancer patients) in the training set is randomly generated from a latent unobserved probability <img src="https://latex.codecogs.com/gif.latex?p_i" /> associated to the corresponding data <img src="https://latex.codecogs.com/gif.latex?x_i" /> (e.g. histopathology images).Training (left): Only <img src="https://latex.codecogs.com/gif.latex?x_i" /> and <img src="https://latex.codecogs.com/gif.latex?y_i" /> can be used for training, because <img src="https://latex.codecogs.com/gif.latex?p_i" /> is not observed. Inference (right): Given new data <img src="https://latex.codecogs.com/gif.latex?x" />, the trained network <img src="https://latex.codecogs.com/gif.latex?f" /> produces a probability estimate <img src="https://latex.codecogs.com/gif.latex?\hat{p}" /> in [0,1].</em>
+  <em> <br /> Figure 1: The probability-estimation problem. In probability estimation, we assume that each observed outcome <img src="https://latex.codecogs.com/gif.latex?y_i" /> (e.g. death or survival in cancer patients) in the training set is randomly generated from a latent unobserved probability <img src="https://latex.codecogs.com/gif.latex?p_i" /> associated to the corresponding data <img src="https://latex.codecogs.com/gif.latex?x_i" /> (e.g. histopathology images).Training (left): Only <img src="https://latex.codecogs.com/gif.latex?x_i" /> and <img src="https://latex.codecogs.com/gif.latex?y_i" /> can be used for training, because <img src="https://latex.codecogs.com/gif.latex?p_i" /> is not observed. Inference (right): Given new data <img src="https://latex.codecogs.com/gif.latex?x" />, the trained network <img src="https://latex.codecogs.com/gif.latex?f" /> produces a probability estimate <img src="https://latex.codecogs.com/gif.latex?\hat{p}" /> in [0,1].</em>
+</p>
+
+## Early Learning and Memorization in Probability Estimation
+Prediction models based on deep learning are typically trained by minimizing the cross entropy between the model output and the training labels. This cost function is  guaranteed to be well calibrated in an infinite-data regime, as illustrated by Figure 2 (first column). Unfortunately, in practice, prediction models are trained on finite data. In this case, we observe that neural networks indeed eventually overfit and *memorize* the observed outcomes completely. Moreover, the estimated probabilities collapse to 0 or 1 (Figure 2, second column). However, calibration is preserved during the first stages of training (Figure 2, third column). We also provide a theorectical analysis to show that such observation is a general phenomenon, intrinsic to the problem of probability estimation with finite data when the dimension is large (Theorem 4.1 in the paper).
+
+- Improves calibration and discrimination performance of the model.
+<p align="left">
+  <img src="https://user-images.githubusercontent.com/32464452/144642950-e477d168-793a-4d9e-818a-5e4c65b637c6.png" alt>
+  <em> <br /> Figure 2: When trained on infinite data (i.e. resampling outcome labels at each epoch according to ground-truth probabilities), models minimizing cross-entropy are well-calibrated (first column). The top row shows results for the synthetic Discrete scenario (top). The bottom row shows results for the Linear scenario (dashed line indicates perfect calibration). However, when trained on fixed observed outcomes, the model eventually overfits, and the probabilities collapse to either 0 or 1 (second column). This is mitigated via early stopping (i.e. selecting the model based on validation cross-entropy loss), which yields relatively good calibration (third column). The proposed Calibration Probability Estimation (CaPE) method exploits this to further improve the model discrimination while ensuring that the output remains well-calibrated.</em>
 </p>
 
 ## Proposed Method: Calibrated Probability Estimation (CAPE)
@@ -26,27 +35,23 @@ We propose Calibrated Probability Estimation (CaPE), a novel technique that modi
 - Avoids overfitting of the model.
 <p align="left">
   <img src="https://user-images.githubusercontent.com/32464452/144643659-6537f6eb-ee52-46f5-ba0e-86e42dd90208.png" alt>
-  <em> <br /> Comparison between the learning curves of cross-entropy (CE) minimization and the proposed calibrated probability estimation (CaPE), smoothed with a 5-epoch moving average. After an early-learning stage where both training and validation losses decrease, CE minimization overfits (first and the second graph), with disastrous consequences in terms of probability estimation (third and fourth graph). In contrast, CaPE prevents overfitting, continuing to improve the model while maintaining calibration. </em>
+  <em> <br /> Figure 3: Comparison between the learning curves of cross-entropy (CE) minimization and the proposed calibrated probability estimation (CaPE), smoothed with a 5-epoch moving average. After an early-learning stage where both training and validation losses decrease, CE minimization overfits (first and the second graph), with disastrous consequences in terms of probability estimation (third and fourth graph). In contrast, CaPE prevents overfitting, continuing to improve the model while maintaining calibration. </em>
 </p>
 
-- Improves calibration and discrimination performance of the model.
-<p align="left">
-  <img src="https://user-images.githubusercontent.com/32464452/144642950-e477d168-793a-4d9e-818a-5e4c65b637c6.png" alt>
-  <em> <br /> When trained on infinite data (i.e. resampling outcome labels at each epoch according to ground-truth probabilities), models minimizing cross-entropy are well-calibrated (first column). The top row shows results for the synthetic Discrete scenario (top). The bottom row shows results for the Linear scenario (dashed line indicates perfect calibration). However, when trained on fixed observed outcomes, the model eventually overfits, and the probabilities collapse to either 0 or 1 (second column). This is mitigated via early stopping (i.e. selecting the model based on validation cross-entropy loss), which yields relatively good calibration (third column). The proposed Calibration Probability Estimation (CaPE) method exploits this to further improve the model discrimination while ensuring that the output remains well-calibrated.</em>
-</p>
+
 
 
 ## Synthetic dataset - Face-Based Risk Prediction
 To benchmark probability-estimation methods, we build a synthetic dataset based on UTKFace (Zhang et al., 2017b), containing face images and associated ages. We use the age of the person to assign them a probability of contracting a disease. Then we simulate whether the person actually contracts the illness or not with the assigned probability.
 <p align="left">
   <img src="https://user-images.githubusercontent.com/32464452/158399694-386ff3ec-6464-4e0f-952f-21c954a953a9.PNG" alt>
-  <em> <br /> Examples from Face-based risk prediction dataset (Linear scenario: The function used to convert age to a probability is a linear function).</em>
+  <em> <br /> Figure 4: Examples from Face-based risk prediction dataset (Linear scenario: The function used to convert age to a probability is a linear function).</em>
 </p>
  
 The probability-estimation task is to estimate the assigned probability from the face image using a model that only has access to the images and the binary outcomes during training.
   <p align="left">
   <img src="https://user-images.githubusercontent.com/32464452/144645100-8beb337d-3457-46c5-acd7-b8f88b849b1c.png" alt>
-  <em> <br /> Our proposed approach outperforms existing approaches for different simulated scenarios.</em>
+  <em> <br /> Figure 5: Our proposed approach outperforms existing approaches for different simulated scenarios.</em>
 </p>
 
 ## Evaluation metrics 
