@@ -16,6 +16,14 @@ Probability-estimation models are trained on observed outcomes (<img src="https:
   <em> <br />The probability-estimation problem. In probability estimation, we assume that each observed outcome <img src="https://latex.codecogs.com/gif.latex?y_i" /> (e.g. death or survival in cancer patients) in the training set is randomly generated from a latent unobserved probability <img src="https://latex.codecogs.com/gif.latex?p_i" /> associated to the corresponding data <img src="https://latex.codecogs.com/gif.latex?x_i" /> (e.g. histopathology images).Training (left): Only <img src="https://latex.codecogs.com/gif.latex?x_i" /> and <img src="https://latex.codecogs.com/gif.latex?y_i" /> can be used for training, because <img src="https://latex.codecogs.com/gif.latex?p_i" /> is not observed. Inference (right): Given new data <img src="https://latex.codecogs.com/gif.latex?x" />, the trained network <img src="https://latex.codecogs.com/gif.latex?f" /> produces a probability estimate <img src="https://latex.codecogs.com/gif.latex?\hat{p}" /> in [0,1].</em>
 </p>
 
+## Early Learning and Memorization in Probability Estimation
+Prediction models based on deep learning are typically trained by minimizing the cross entropy between the model output and the training labels. This cost function is  guaranteed to be well calibrated in an infinite-data regime, as illustrated by Figure 2 (first column). Unfortunately, in practice, prediction models are trained on finite data. In this case, we observe that neural networks indeed eventually overfit and *memorize* the observed outcomes completely. Moreover, the estimated probabilities collapse to 0 or 1 (Figure 2, second column). However, calibration is preserved during the first stages of training (Figure 2, third column). We also provide a theorectical analysis to show that such observation is a general phenomenon, intrinsic to the problem of probability estimation with finite data when the dimension is large (Theorem 4.1 in the paper).
+
+<p align="left">
+  <img src="https://user-images.githubusercontent.com/32464452/144642950-e477d168-793a-4d9e-818a-5e4c65b637c6.png" alt>
+  <em> <br /> Figure 2: When trained on infinite data (i.e. resampling outcome labels at each epoch according to ground-truth probabilities), models minimizing cross-entropy are well-calibrated (first column). The top row shows results for the synthetic Discrete scenario (top). The bottom row shows results for the Linear scenario (dashed line indicates perfect calibration). However, when trained on fixed observed outcomes, the model eventually overfits, and the probabilities collapse to either 0 or 1 (second column). This is mitigated via early stopping (i.e. selecting the model based on validation cross-entropy loss), which yields relatively good calibration (third column). The proposed Calibration Probability Estimation (CaPE) method exploits this to further improve the model discrimination while ensuring that the output remains well-calibrated.</em>
+</p>
+
 ## Proposed Method: Calibrated Probability Estimation (CAPE)
 We propose Calibrated Probability Estimation (CaPE), a novel technique that modifies the training process so that output probabilities are consistent with empirical probabilities computed from the data. CaPE outperforms existing approaches on most metrics on synthetic and real-world data. The pseudo-code for our proposed approach can be seen below:
 <p align="left">
@@ -25,16 +33,17 @@ We propose Calibrated Probability Estimation (CaPE), a novel technique that modi
 ### Our proposed approach achieves two objectives:
 
 - Avoids overfitting of the model.
+- Improves calibration and discrimination performance of the model.
 <p align="left">
   <img src="https://user-images.githubusercontent.com/32464452/144643659-6537f6eb-ee52-46f5-ba0e-86e42dd90208.png" alt>
   <em> <br /> Comparison between the learning curves of cross-entropy (CE) minimization and the proposed calibrated probability estimation (CaPE), smoothed with a 5-epoch moving average. After an early-learning stage where both training and validation losses decrease, CE minimization overfits (first and the second graph), with disastrous consequences in terms of probability estimation (third and fourth graph). In contrast, CaPE prevents overfitting, continuing to improve the model while maintaining calibration. </em>
 </p>
 
-- Improves calibration and discrimination performance of the model.
-<p align="left">
+
+<!-- <p align="left">
   <img src="https://user-images.githubusercontent.com/32464452/144642950-e477d168-793a-4d9e-818a-5e4c65b637c6.png" alt>
   <em> <br /> When trained on infinite data (i.e. resampling outcome labels at each epoch according to ground-truth probabilities), models minimizing cross-entropy are well-calibrated (first column). The top row shows results for the synthetic Discrete scenario (top). The bottom row shows results for the Linear scenario (dashed line indicates perfect calibration). However, when trained on fixed observed outcomes, the model eventually overfits, and the probabilities collapse to either 0 or 1 (second column). This is mitigated via early stopping (i.e. selecting the model based on validation cross-entropy loss), which yields relatively good calibration (third column). The proposed Calibration Probability Estimation (CaPE) method exploits this to further improve the model discrimination while ensuring that the output remains well-calibrated.</em>
-</p>
+</p> -->
 
 
 ## Synthetic dataset - Face-Based Risk Prediction
