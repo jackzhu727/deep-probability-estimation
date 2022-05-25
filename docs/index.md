@@ -2,14 +2,14 @@
 
 This website contains results, code, and pre-trained models from [Deep Probability Estimation](https://arxiv.org/abs/2111.10734) by Sheng Liu\*, Aakash Kaku\*, Weicheng Zhu\*, Matan Leibovich\*,  Sreyas Mohan\*, Boyang Yu, Laure Zanna, Narges Razavian, Carlos Fernandez-Granda [\* - Equal Contribution].
 
-## What is probability estimation and why is it important?
-Reliable probability estimation is of crucial importance in many real-world applications where there is inherent uncertainty, such as weather forecasting, medical prognosis, or collision avoidance in autonomous vehicles.
+## What is probability estimation?
+Estimating probabilities reliably is of crucial importance in many real-world applications such as weather forecasting, medical prognosis, or collision avoidance in autonomous vehicles. This work investigates how to use deep neural networks to estimate probabilities from high-dimensional data such as climatological radar maps, histopathology images, and dashcam videos. 
 
 
 ![website_image_2](https://user-images.githubusercontent.com/32464452/158398042-b6d0d993-3ea7-4a24-859f-bb45a00dec52.png)
 
 <!-- <img align="center" width="720" src="https://user-images.githubusercontent.com/32464452/158396497-98d4ac2a-8668-4700-8ff3-e3ec6611e892.png"> -->
-Probability-estimation models are trained on observed outcomes (<img src="https://latex.codecogs.com/gif.latex?y_i" />) (e.g. whether it has rained or not, or whether a patient has died or not), because the ground-truth probabilities (<img src="https://latex.codecogs.com/gif.latex?p_i" />) of the events of interest are typically unknown. The problem is therefore analogous to binary classification, with the important difference that the objective is to estimate probabilities (<img src="https://latex.codecogs.com/gif.latex?\hat{p}" />) rather than predicting the specific outcome.
+Probability-estimation models are trained on observed outcomes (<img src="https://latex.codecogs.com/gif.latex?y_i" />) (e.g. whether it has rained or not, or whether a patient has died or not), because the ground-truth probabilities (<img src="https://latex.codecogs.com/gif.latex?p_i" />) of the events of interest are typically unknown. The problem is therefore analogous to binary classification, with the important difference that the main objective at inference is to estimate probabilities (<img src="https://latex.codecogs.com/gif.latex?\hat{p}" />) rather than predicting the specific outcome.
 
 <p align="left">
   <img src="https://user-images.githubusercontent.com/32464452/144637201-b9aed32f-f5e7-46f0-a4ef-0a9f2baa7a78.png" alt>
