@@ -20,7 +20,7 @@ Prediction models based on deep learning are typically trained by minimizing the
 
 <p align="left">
   <img src="https://user-images.githubusercontent.com/32464452/144642950-e477d168-793a-4d9e-818a-5e4c65b637c6.png" alt>
- 
+</p>
 
 ## Proposed Method: Calibrated Probability Estimation (CAPE)
 We propose Calibrated Probability Estimation (CaPE). Our starting point is a model obtained via early stopping using validation data on the cross-entropy loss. CaPE is designed to produce a discriminative model that is well calibrated. This is achieved by alternatively minimizing two loss functions: (1) a *discrimination loss* dependent on the observed binary outcomes, and (2) a *calibration loss*, which ensures that the output probabilities remain calibrated. 
@@ -29,7 +29,7 @@ The following figures shows the learning curves of cross-entropy (CE) minimizati
 
 <p align="left">
   <img src="https://user-images.githubusercontent.com/32464452/144643659-6537f6eb-ee52-46f5-ba0e-86e42dd90208.png" alt>
-
+</p>
 
 
 <!-- <p align="left">
