@@ -19,8 +19,7 @@ The training labels are the 0/1 events indicating whether the mean precipitation
 The dataset contains quality-controlled rainfall-depth composites from 17 operational DWD Doppler radars. 
 It has a spatial extent of 900x900 km, and covers the entirety of Germany. 
 Data exists since 2006, with a spatial and temporal resolution of 1x1 km and 5 minutes, respectively. 
-The dataset has been used to train RainNet, a pricipitation nowcasting model (Ayzel, G. Rainnet: a convolutional neural network for radarbased precipitation nowcasting. [RainNet](https://github.
-com/hydrogo/rainnet), 2020). 
+The dataset has been used to train RainNet, a pricipitation nowcasting model (Ayzel, G. Rainnet: a convolutional neural network for radarbased precipitation nowcasting. [RainNet](https://github.com/hydrogo/rainnet), 2020). 
 
 We use a ResNet18 network architecture, with 3 input channels and 2 output channels.
 The input to the network are 3 precipitation maps which cover a fixed area of 300km x 300 km in the center of the grid (300 x 300 pixels), set 10 minutes apart. The training, validation and test datasets consist of 20000, 6000 and 3000 samples, respectively, all separated temporally, over the span of 15 years.
