@@ -28,4 +28,4 @@ The input to the network are 3 precipitation maps which cover a fixed area of 30
 A pytorch implementation can be found [here](https://github.com/jackzhu727/deep-probability-estimation/blob/main/datasets/weather_forcast.py)
 
 ## Dataset
-A preprocessed dataset used by the paper can be found [here](https://zenodo.org/record/3629951#.Y20qhuyZP0o)
+The dataset used by the paper can be found [here](https://zenodo.org/record/3629951#.Y20qhuyZP0o)
